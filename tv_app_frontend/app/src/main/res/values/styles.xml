@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme for Android TV -->
+    <!-- Ocean Professional Theme on top of Leanback -->
     <style name="AppTheme" parent="Theme.Leanback">
-        <!-- Customize your theme here -->
         <item name="android:windowBackground">@color/tv_background</item>
-        <item name="android:colorPrimary">@color/tv_accent</item>
+        <item name="android:colorPrimary">@color/ocean_primary</item>
+        <item name="android:colorAccent">@color/ocean_secondary</item>
+        <item name="android:textColorPrimary">@color/ocean_text</item>
+        <item name="android:colorControlHighlight">@color/ocean_secondary</item>
+    </style>
+
+    <!-- Card styles -->
+    <style name="CardStyle">
+        <item name="android:background">@color/card_surface</item>
+        <item name="android:foreground">@color/ocean_secondary</item>
     </style>
 </resources>

@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- TV optimized colors -->
-    <color name="tv_background">#000000</color>
-    <color name="tv_overlay">#CC000000</color>
+    <color name="tv_background">#0A0F1A</color>
+    <color name="tv_overlay">#CC0A0F1A</color>
     <color name="tv_primary">#FFFFFF</color>
-    <color name="tv_secondary">#CCCCCC</color>
+    <color name="tv_secondary">#D1D5DB</color>
     <color name="tv_accent">#2196F3</color>
     <color name="tv_button_focused">#FFFFFF</color>
     <color name="tv_button_normal">#80FFFFFF</color>
+
+    <!-- Ocean Professional -->
+    <color name="ocean_primary">#2563EB</color>
+    <color name="ocean_secondary">#F59E0B</color>
+    <color name="ocean_error">#EF4444</color>
+    <color name="ocean_surface">#111827</color>
+    <color name="ocean_text">#F9FAFB</color>
+    <color name="card_surface">#1F2937</color>
 </resources>

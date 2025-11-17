@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Required for Android TV -->
     <uses-feature
@@ -14,14 +15,19 @@
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" android:maxSdkVersion="33"/>
 
     <application
+        android:name=".core.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="tv_app_frontend"
+        android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:banner="@drawable/app_banner">
 
+        <!-- Launcher Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -31,6 +37,26 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Media3 Playback service (optional foreground) -->
+        <service
+            android:name=".player.PlaybackService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!-- Google Sign-In -->
+        <activity android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:exported="false" />
+        <service android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+            android:exported="true"
+            tools:replace="android:exported"
+            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
+
+        <!-- Recommendations (client fallback) -->
+        <receiver
+            android:name=".recommendations.RecommendationPublisher"
+            android:exported="false" />
+
     </application>
 
 </manifest>

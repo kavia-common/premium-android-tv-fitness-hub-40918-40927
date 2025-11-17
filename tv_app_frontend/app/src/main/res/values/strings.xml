@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">tv_app_frontend</string>
-    
+
+    <!-- Sections -->
+    <string name="section_continue">Continue Watching</string>
+    <string name="section_favorites">Favorites</string>
+    <string name="section_recent">Recently Watched</string>
+    <string name="section_categories">Categories</string>
+
     <!-- Rating Screen Strings -->
     <string name="rating_title">Did you like it?</string>
     <string name="rating_message">Your vote helps us recommend more content like this.</string>

@@ -2,42 +2,28 @@ package com.example.tv_app_frontend
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import android.view.KeyEvent
-import android.widget.TextView
+import androidx.fragment.app.commit
+import com.example.tv_app_frontend.databinding.ActivityMainBinding
+import com.example.tv_app_frontend.ui.tv.HomeBrowseFragment
 
 /**
- * Main Activity for Android TV
- * Extends FragmentActivity for Leanback compatibility
+ * PUBLIC_INTERFACE
+ * MainActivity is the entry point for the Android TV app. It hosts the Leanback
+ * HomeBrowseFragment in a full-screen container.
  */
 class MainActivity : FragmentActivity() {
 
-    private lateinit var titleText: TextView
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        
-        titleText = findViewById(R.id.title_text)
-        titleText.text = "tv_app_frontend"
-        
-        // TODO: Initialize your rating screen components here
-        // setupRatingOverlay()
-    }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        // Handle TV remote control inputs
-        return when (keyCode) {
-            KeyEvent.KEYCODE_DPAD_CENTER,
-            KeyEvent.KEYCODE_ENTER -> {
-                // Handle SELECT/OK button
-                true
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace(R.id.container, HomeBrowseFragment.newInstance())
             }
-            KeyEvent.KEYCODE_BACK -> {
-                // Handle BACK button
-                finish()
-                true
-            }
-            else -> super.onKeyDown(keyCode, event)
         }
     }
 }
