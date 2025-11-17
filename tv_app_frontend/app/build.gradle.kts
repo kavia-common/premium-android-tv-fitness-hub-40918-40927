@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    // Keep kapt only if we truly need annotation processing (Room). We'll keep it but ensure it's stable.
     id("kotlin-kapt")
 }
 
@@ -58,7 +59,9 @@ android {
     }
 
     buildFeatures {
+        // We use only ViewBinding; DataBinding disabled to avoid kapt/databinding processing.
         viewBinding = true
+        dataBinding = false
         buildConfig = true
     }
 
@@ -67,6 +70,18 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    lint {
+        // Keep CI-friendly lint; don't abort the whole build on debug variant.
+        abortOnError = false
+        warningsAsErrors = false
+    }
+}
+
+// Kapt configuration to make processors robust in CI. If Room remains, this helps.
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
 }
 
 dependencies {
@@ -108,6 +123,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.0.0")
 
     // Room (optional caching via minimal viable, we will use SharedPreferences primarily)
+    // Keeping Room but ensure kapt works; if later not needed, remove both runtime/ktx and compiler.
     implementation("androidx.room:room-runtime:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")

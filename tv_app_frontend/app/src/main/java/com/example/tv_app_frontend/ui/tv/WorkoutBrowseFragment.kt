@@ -5,6 +5,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.leanback.app.RowsSupportFragment
 import androidx.leanback.widget.*
+import com.example.tv_app_frontend.R
 import com.example.tv_app_frontend.data.remote.WorkoutItem
 import com.example.tv_app_frontend.ui.browse.BrowseViewModel
 import com.example.tv_app_frontend.ui.workout.WorkoutDetailFragment

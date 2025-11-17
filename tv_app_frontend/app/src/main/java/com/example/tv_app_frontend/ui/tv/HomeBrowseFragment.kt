@@ -5,6 +5,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.*
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.tv_app_frontend.R
 import com.example.tv_app_frontend.data.remote.CategoryItem
@@ -25,7 +26,7 @@ class HomeBrowseFragment : BrowseSupportFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         title = resources.getString(R.string.app_name)
-        brandColor = resources.getColor(R.color.ocean_primary, null)
+        brandColor = ContextCompat.getColor(requireContext(), R.color.ocean_primary)
         headersState = HEADERS_ENABLED
         isHeadersTransitionOnBackEnabled = true
 
