@@ -7,6 +7,7 @@ import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.*
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.tv_app_frontend.R
 import com.example.tv_app_frontend.data.remote.CategoryItem
 import com.example.tv_app_frontend.data.remote.WorkoutItem
@@ -26,7 +27,8 @@ class HomeBrowseFragment : BrowseSupportFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         title = resources.getString(R.string.app_name)
-        brandColor = ContextCompat.getColor(requireContext(), R.color.ocean_primary)
+        // Use setBrandColor for compatibility with Leanback; ContextCompat for API-safe color retrieval.
+        setBrandColor(ContextCompat.getColor(requireContext(), R.color.ocean_primary))
         headersState = HEADERS_ENABLED
         isHeadersTransitionOnBackEnabled = true
 
@@ -54,10 +56,10 @@ class HomeBrowseFragment : BrowseSupportFragment() {
 
     private fun bindHome(data: HomeState.Data) {
         rowsAdapter.clear()
-        addWorkoutListRow("Continue Watching", data.home.continueWatching)
-        addWorkoutListRow("Favorites", data.home.favorites)
-        addWorkoutListRow("Recent", data.home.recent)
-        addCategoryRow("Categories", data.home.categories)
+        addWorkoutListRow(getString(R.string.section_continue), data.home.continueWatching)
+        addWorkoutListRow(getString(R.string.section_favorites), data.home.favorites)
+        addWorkoutListRow(getString(R.string.section_recent), data.home.recent)
+        addCategoryRow(getString(R.string.section_categories), data.home.categories)
     }
 
     private fun addWorkoutListRow(header: String, items: List<WorkoutItem>) {
@@ -119,6 +121,10 @@ class WorkoutCardPresenter : Presenter() {
         val card = ImageCardView(parent.context).apply {
             setMainImageDimensions(320, 180)
             infoVisibility = ImageCardView.CARD_REGION_VISIBLE_ALWAYS
+            isFocusable = true
+            isFocusableInTouchMode = true
+            // Optional: background helps focus ring visibility on some TVs
+            setBackgroundColor(ContextCompat.getColor(context, R.color.card_surface))
         }
         return ViewHolder(card)
     }
@@ -127,14 +133,27 @@ class WorkoutCardPresenter : Presenter() {
         val workout = item as WorkoutItem
         val card = viewHolder.view as ImageCardView
         card.titleText = workout.title
-        card.contentText = "${(workout.durationSec / 60)} min • ${workout.level ?: ""}"
+
+        val mins = (workout.durationSec / 60).coerceAtLeast(0)
+        val level = workout.level ?: ""
+        // Use formatted string resource for consistency/localization
+        card.contentText = card.context.getString(R.string.duration_level_format, mins, level)
+
+        // Set a placeholder immediately to avoid flicker while Glide loads
+        card.mainImageView.setImageResource(R.drawable.ic_launcher)
+
         Glide.with(card.context)
             .load(workout.thumbnailUrl)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+            .placeholder(R.drawable.ic_launcher)
+            .error(R.drawable.ic_launcher)
             .fallback(R.drawable.ic_launcher)
             .into(card.mainImageView)
     }
 
-    override fun onUnbindViewHolder(viewHolder: ViewHolder) {}
+    override fun onUnbindViewHolder(viewHolder: ViewHolder) {
+        // Glide clears handled automatically when view recycled; no-op for now
+    }
 }
 
 class CategoryCardPresenter : Presenter() {
@@ -142,6 +161,9 @@ class CategoryCardPresenter : Presenter() {
         val card = ImageCardView(parent.context).apply {
             setMainImageDimensions(320, 180)
             infoVisibility = ImageCardView.CARD_REGION_VISIBLE_ALWAYS
+            isFocusable = true
+            isFocusableInTouchMode = true
+            setBackgroundColor(ContextCompat.getColor(context, R.color.card_surface))
         }
         return ViewHolder(card)
     }
@@ -150,11 +172,20 @@ class CategoryCardPresenter : Presenter() {
         val category = item as CategoryItem
         val card = viewHolder.view as ImageCardView
         card.titleText = category.name
+
+        // Set immediate placeholder
+        card.mainImageView.setImageResource(R.drawable.ic_launcher)
+
         Glide.with(card.context)
             .load(category.heroImageUrl)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+            .placeholder(R.drawable.ic_launcher)
+            .error(R.drawable.ic_launcher)
             .fallback(R.drawable.ic_launcher)
             .into(card.mainImageView)
     }
 
-    override fun onUnbindViewHolder(viewHolder: ViewHolder) {}
+    override fun onUnbindViewHolder(viewHolder: ViewHolder) {
+        // no-op
+    }
 }

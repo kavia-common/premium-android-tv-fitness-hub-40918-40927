@@ -5,8 +5,11 @@
     <!-- Sections -->
     <string name="section_continue">Continue Watching</string>
     <string name="section_favorites">Favorites</string>
-    <string name="section_recent">Recently Watched</string>
+    <string name="section_recent">Recent</string>
     <string name="section_categories">Categories</string>
+
+    <!-- Formats -->
+    <string name="duration_level_format">%1$d min • %2$s</string>
 
     <!-- Rating Screen Strings -->
     <string name="rating_title">Did you like it?</string>

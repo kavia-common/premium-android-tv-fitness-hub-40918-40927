@@ -32,7 +32,8 @@ class WorkoutBrowseFragment : RowsSupportFragment() {
             val cardPresenter = WorkoutCardPresenter()
             val listAdapter = ArrayObjectAdapter(cardPresenter)
             items.forEach { listAdapter.add(it) }
-            rowAdapter.add(ListRow(HeaderItem(category ?: "Workouts"), listAdapter))
+            val headerTitle = category ?: getString(R.string.section_categories)
+            rowAdapter.add(ListRow(HeaderItem(headerTitle), listAdapter))
         }
 
         setOnItemViewClickedListener { _, item, _, _ ->
@@ -51,7 +52,7 @@ class WorkoutBrowseFragment : RowsSupportFragment() {
         const val ARG_CATEGORY = "arg_category"
 
         // PUBLIC_INTERFACE
-        fun newInstance(category: String?): WorkoutBrowseFragment {
+        fun newInstance(category: String? = null): WorkoutBrowseFragment {
             /** Create instance with given category. */
             val f = WorkoutBrowseFragment()
             f.arguments = bundleOf(ARG_CATEGORY to category)
