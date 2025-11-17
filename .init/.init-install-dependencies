@@ -1,0 +1,4 @@
+{
+    "command": "./gradlew dependencies",
+    "working_directory": "/home/kavia/workspace/code-generation/premium-android-tv-fitness-hub-40918-40927/tv_app_frontend"
+}
