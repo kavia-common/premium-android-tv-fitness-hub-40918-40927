@@ -13,6 +13,13 @@
     <color name="ocean_primary">#2563EB</color>
     <color name="ocean_secondary">#F59E0B</color>
     <color name="ocean_error">#EF4444</color>
+
+    <!-- Light palette per Ocean Professional -->
+    <color name="ocean_background_light">#F9FAFB</color>
+    <color name="ocean_surface_light">#FFFFFF</color>
+    <color name="ocean_text_dark">#111827</color>
+
+    <!-- Dark surfaces for TV cards -->
     <color name="ocean_surface">#111827</color>
     <color name="ocean_text">#F9FAFB</color>
     <color name="card_surface">#1F2937</color>

@@ -5,6 +5,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.leanback.app.RowsSupportFragment
 import androidx.leanback.widget.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.tv_app_frontend.R
 import com.example.tv_app_frontend.data.remote.WorkoutItem
 import com.example.tv_app_frontend.ui.browse.BrowseViewModel
@@ -12,7 +14,7 @@ import com.example.tv_app_frontend.ui.workout.WorkoutDetailFragment
 
 /**
  * PUBLIC_INTERFACE
- * WorkoutBrowseFragment displays a single row/grid of workouts for a category with filters.
+ * WorkoutBrowseFragment displays workouts for a category with Ocean spacing/style.
  */
 class WorkoutBrowseFragment : RowsSupportFragment() {
 
@@ -24,7 +26,11 @@ class WorkoutBrowseFragment : RowsSupportFragment() {
         val category = arguments?.getString(ARG_CATEGORY)
         vm.setFilters(category, null, null, null)
 
-        rowAdapter = ArrayObjectAdapter(ListRowPresenter())
+        val listRowPresenter = ListRowPresenter().apply {
+            setShadowEnabled(true)
+            setKeepChildForeground(true)
+        }
+        rowAdapter = ArrayObjectAdapter(listRowPresenter)
         adapter = rowAdapter
 
         vm.items.observe(this) { items ->
@@ -44,6 +50,34 @@ class WorkoutBrowseFragment : RowsSupportFragment() {
                     .replace(R.id.container, f)
                     .addToBackStack(null)
                     .commit()
+            }
+        }
+
+        // Prefetch neighboring items and apply spacing when selection changes for smooth UX
+        setOnItemViewSelectedListener { _, item, rowViewHolder, _ ->
+            if (rowViewHolder is ListRowPresenter.ViewHolder) {
+                val grid = rowViewHolder.gridView
+                val hSpace = resources.getDimensionPixelSize(R.dimen.card_spacing_horizontal)
+                val vSpace = resources.getDimensionPixelSize(R.dimen.row_spacing_vertical)
+                grid.setItemSpacing(hSpace)
+                val padStart = grid.paddingStart
+                val padEnd = grid.paddingEnd
+                grid.setPaddingRelative(padStart, vSpace / 2, padEnd, vSpace / 2)
+            }
+
+            if (item == null || rowViewHolder !is ListRowPresenter.ViewHolder) return@setOnItemViewSelectedListener
+            val row = rowViewHolder.row
+            if (row !is ListRow) return@setOnItemViewSelectedListener
+            val objectAdapter = row.adapter as? ArrayObjectAdapter ?: return@setOnItemViewSelectedListener
+            val index = (0 until objectAdapter.size()).firstOrNull { i -> objectAdapter.get(i) == item } ?: return@setOnItemViewSelectedListener
+            val context = context ?: return@setOnItemViewSelectedListener
+
+            for (offset in 1..3) {
+                val next = if (index + offset < objectAdapter.size()) objectAdapter.get(index + offset) else null
+                val url = (next as? WorkoutItem)?.thumbnailUrl
+                if (!url.isNullOrBlank()) {
+                    Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).preload()
+                }
             }
         }
     }

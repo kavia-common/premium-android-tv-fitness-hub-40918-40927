@@ -8,11 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.tv_app_frontend.databinding.FragmentWorkoutDetailBinding
+import jp.wasabeef.glide.transformations.BlurTransformation
 
 /**
  * PUBLIC_INTERFACE
  * WorkoutDetailFragment plays workout video and shows minimal metadata.
+ * Adds blurred thumbnail background and TV-friendly typography.
  */
 class WorkoutDetailFragment : Fragment() {
 
@@ -38,6 +44,18 @@ class WorkoutDetailFragment : Fragment() {
                 binding.title.text = detail.title
                 binding.description.text = detail.description ?: ""
                 initPlayer(detail.videoUrl)
+            }
+        }
+
+        // Load blurred background thumbnail when available
+        vm.thumbnailUrl.observe(viewLifecycleOwner) { url ->
+            if (!url.isNullOrBlank()) {
+                Glide.with(requireContext())
+                    .load(url)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .transform(CenterCrop(), BlurTransformation(18, 4))
+                    .into(binding.bgImage)
             }
         }
     }

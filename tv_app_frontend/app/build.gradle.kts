@@ -123,6 +123,8 @@ dependencies {
 
     // Image loading
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    // Glide transformations for rounded corners and blur
+    implementation("jp.wasabeef:glide-transformations:4.3.0")
 
     // Google Sign In
     implementation("com.google.android.gms:play-services-auth:21.0.0")

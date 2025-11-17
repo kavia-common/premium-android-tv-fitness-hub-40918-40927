@@ -2,14 +2,15 @@
 <resources>
     <!-- Ocean Professional Theme on top of Leanback -->
     <style name="AppTheme" parent="Theme.Leanback">
-        <item name="android:windowBackground">@color/tv_background</item>
+        <item name="android:windowBackground">@drawable/ocean_bg_gradient</item>
         <item name="android:colorPrimary">@color/ocean_primary</item>
         <item name="android:colorAccent">@color/ocean_secondary</item>
-        <item name="android:textColorPrimary">@color/ocean_text</item>
-        <item name="android:colorControlHighlight">@color/ocean_secondary</item>
+        <item name="android:textColorPrimary">@color/ocean_text_dark</item>
+        <!-- Disable ripple for TV remote -->
+        <item name="android:colorControlHighlight">@android:color/transparent</item>
     </style>
 
-    <!-- Card styles -->
+    <!-- Card styles (not directly referenced by Leanback ImageCardView but here for consistency) -->
     <style name="CardStyle">
         <item name="android:background">@color/card_surface</item>
         <item name="android:foreground">@color/ocean_secondary</item>
