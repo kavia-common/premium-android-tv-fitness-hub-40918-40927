@@ -5,10 +5,12 @@ import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.example.tv_app_frontend.data.auth.TokenStore
+import com.example.tv_app_frontend.data.local.LocalDataSource
 import com.example.tv_app_frontend.data.remote.ApiClient
 
 /**
- * Application class to initialize app-wide singletons like secure storage and Retrofit.
+ * Application class to initialize app-wide singletons like secure storage and data sources.
+ * Runtime backend is not required; LocalDataSource serves all catalog data offline.
  */
 class App : Application() {
 
@@ -29,7 +31,11 @@ class App : Application() {
         )
         TokenStore.initialize(securePrefs)
 
-        // Initialize API client with Auth Interceptor
+        // Initialize local/mock data source for offline operation
+        LocalDataSource.initialize(this)
+
+        // Keep ApiClient initialized (harmless) so BuildConfig fields remain available but unused.
+        // No runtime dependency on backend endpoints.
         ApiClient.initialize(this)
     }
 

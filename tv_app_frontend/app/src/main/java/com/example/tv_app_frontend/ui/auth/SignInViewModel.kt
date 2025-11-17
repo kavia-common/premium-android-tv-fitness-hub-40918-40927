@@ -5,13 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tv_app_frontend.data.auth.TokenStore
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.example.tv_app_frontend.BuildConfig
 
 /**
- * ViewModel to handle Google Sign-In for TV compatible flow.
+ * ViewModel to handle a stubbed sign-in flow for offline demo builds.
+ * No Google services or network interaction occur here.
  */
 class SignInViewModel : ViewModel() {
 
@@ -19,28 +16,24 @@ class SignInViewModel : ViewModel() {
     val signedIn: LiveData<Boolean> = _signedIn
 
     // PUBLIC_INTERFACE
-    fun startGoogleSignIn(activity: Activity) {
-        /** Start Google Sign-In with basic profile request. */
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(BuildConfig.GOOGLE_OAUTH_WEB_CLIENT_ID)
-            .requestEmail()
-            .build()
-        val client = GoogleSignIn.getClient(activity, gso)
-        val intent = client.signInIntent
-        activity.startActivityForResult(intent, RC_SIGN_IN)
+    fun startGoogleSignIn(@Suppress("UNUSED_PARAMETER") activity: Activity) {
+        /**
+         * Offline demo: immediately consider user as "signed in" with a local mock token.
+         * No intents or Google services are invoked.
+         */
+        TokenStore.setTokens(access = "LOCAL_DEMO_TOKEN", refresh = null)
+        _signedIn.postValue(true)
     }
 
     // PUBLIC_INTERFACE
-    fun handleSignIn(account: GoogleSignInAccount?) {
-        /** Store token and update UI. In production exchange idToken with backend for app tokens. */
-        val idToken = account?.idToken
-        if (!idToken.isNullOrBlank()) {
-            // This is where the app would exchange token with backend.
-            TokenStore.setTokens(access = idToken, refresh = null)
-            _signedIn.postValue(true)
-        } else {
-            _signedIn.postValue(false)
+    fun handleSignIn(@Suppress("UNUSED_PARAMETER") account: Any? = null) {
+        /**
+         * Offline demo: already signed in via startGoogleSignIn; keep the state.
+         */
+        if (TokenStore.getAccessToken().isNullOrBlank()) {
+            TokenStore.setTokens(access = "LOCAL_DEMO_TOKEN", refresh = null)
         }
+        _signedIn.postValue(true)
     }
 
     companion object {

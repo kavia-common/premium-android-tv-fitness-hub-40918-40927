@@ -1,0 +1,236 @@
+{
+  "home": {
+    "favorites": [
+      {
+        "id": "w1",
+        "title": "Total Body Strength",
+        "thumbnailUrl": "file:///android_asset/thumbs/20251117_165245_picture_1.png",
+        "durationSec": 1800,
+        "level": "Intermediate",
+        "category": "Strength"
+      },
+      {
+        "id": "w2",
+        "title": "HIIT Turbo",
+        "thumbnailUrl": "file:///android_asset/thumbs/20251117_165247_picture_7.png",
+        "durationSec": 1200,
+        "level": "Advanced",
+        "category": "HIIT"
+      }
+    ],
+    "recent": [
+      {
+        "id": "w3",
+        "title": "Morning Yoga Flow",
+        "thumbnailUrl": "file:///android_asset/thumbs/20251117_165252_picture_10.png",
+        "durationSec": 1500,
+        "level": "Beginner",
+        "category": "Yoga"
+      },
+      {
+        "id": "w4",
+        "title": "Core Blast",
+        "thumbnailUrl": "file:///android_asset/thumbs/20251117_165253_picture_17.png",
+        "durationSec": 900,
+        "level": "Intermediate",
+        "category": "Core"
+      }
+    ],
+    "continueWatching": [
+      {
+        "id": "w5",
+        "title": "Cardio Burnout",
+        "thumbnailUrl": "file:///android_asset/thumbs/20251117_165259_picture_22.png",
+        "durationSec": 1800,
+        "level": "Intermediate",
+        "category": "Cardio"
+      }
+    ],
+    "categories": [
+      {
+        "id": "c_hiit",
+        "name": "HIIT",
+        "heroImageUrl": "file:///android_asset/thumbs/20251117_165303_picture_23.png"
+      },
+      {
+        "id": "c_strength",
+        "name": "Strength",
+        "heroImageUrl": "file:///android_asset/thumbs/20251117_165307_picture_25.png"
+      },
+      {
+        "id": "c_yoga",
+        "name": "Yoga",
+        "heroImageUrl": "file:///android_asset/thumbs/20251117_165310_picture_27.png"
+      },
+      {
+        "id": "c_pilates",
+        "name": "Pilates",
+        "heroImageUrl": "file:///android_asset/thumbs/20251117_165313_picture_35.png"
+      }
+    ]
+  },
+  "workouts": [
+    {
+      "id": "w1",
+      "title": "Total Body Strength",
+      "thumbnailUrl": "file:///android_asset/thumbs/20251117_165245_picture_1.png",
+      "durationSec": 1800,
+      "level": "Intermediate",
+      "category": "Strength"
+    },
+    {
+      "id": "w2",
+      "title": "HIIT Turbo",
+      "thumbnailUrl": "file:///android_asset/thumbs/20251117_165247_picture_7.png",
+      "durationSec": 1200,
+      "level": "Advanced",
+      "category": "HIIT"
+    },
+    {
+      "id": "w3",
+      "title": "Morning Yoga Flow",
+      "thumbnailUrl": "file:///android_asset/thumbs/20251117_165252_picture_10.png",
+      "durationSec": 1500,
+      "level": "Beginner",
+      "category": "Yoga"
+    },
+    {
+      "id": "w4",
+      "title": "Core Blast",
+      "thumbnailUrl": "file:///android_asset/thumbs/20251117_165253_picture_17.png",
+      "durationSec": 900,
+      "level": "Intermediate",
+      "category": "Core"
+    },
+    {
+      "id": "w5",
+      "title": "Cardio Burnout",
+      "thumbnailUrl": "file:///android_asset/thumbs/20251117_165259_picture_22.png",
+      "durationSec": 1800,
+      "level": "Intermediate",
+      "category": "Cardio"
+    },
+    {
+      "id": "w6",
+      "title": "Pilates Power",
+      "thumbnailUrl": "file:///android_asset/thumbs/20251117_165319_picture_72.png",
+      "durationSec": 1600,
+      "level": "Intermediate",
+      "category": "Pilates"
+    },
+    {
+      "id": "w7",
+      "title": "Glutes & Legs",
+      "thumbnailUrl": "file:///android_asset/thumbs/20251117_165403_picture_29.png",
+      "durationSec": 1800,
+      "level": "Advanced",
+      "category": "Strength"
+    },
+    {
+      "id": "w8",
+      "title": "Upper Body Sculpt",
+      "thumbnailUrl": "file:///android_asset/thumbs/20251117_165404_picture_34.png",
+      "durationSec": 1500,
+      "level": "Intermediate",
+      "category": "Strength"
+    }
+  ],
+  "details": {
+    "w1": {
+      "id": "w1",
+      "title": "Total Body Strength",
+      "description": "A balanced total body strength circuit focusing on form and progressive overload.",
+      "videoUrl": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "audioDescriptionUrl": null,
+      "ttsEnabled": false,
+      "durationSec": 1800,
+      "level": "Intermediate",
+      "category": "Strength",
+      "equipment": ["Dumbbells", "Mat"]
+    },
+    "w2": {
+      "id": "w2",
+      "title": "HIIT Turbo",
+      "description": "Explosive intervals to boost VO2 max and torch calories.",
+      "videoUrl": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "audioDescriptionUrl": null,
+      "ttsEnabled": false,
+      "durationSec": 1200,
+      "level": "Advanced",
+      "category": "HIIT",
+      "equipment": ["Mat"]
+    },
+    "w3": {
+      "id": "w3",
+      "title": "Morning Yoga Flow",
+      "description": "Gentle vinyasa flow to awaken your body and mind.",
+      "videoUrl": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "audioDescriptionUrl": null,
+      "ttsEnabled": true,
+      "durationSec": 1500,
+      "level": "Beginner",
+      "category": "Yoga",
+      "equipment": ["Mat", "Blocks"]
+    },
+    "w4": {
+      "id": "w4",
+      "title": "Core Blast",
+      "description": "Focused core sequence for trunk stability and strength.",
+      "videoUrl": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "audioDescriptionUrl": null,
+      "ttsEnabled": false,
+      "durationSec": 900,
+      "level": "Intermediate",
+      "category": "Core",
+      "equipment": ["Mat"]
+    },
+    "w5": {
+      "id": "w5",
+      "title": "Cardio Burnout",
+      "description": "Sustained cardio intervals mixed with agility to keep the heart rate up.",
+      "videoUrl": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "audioDescriptionUrl": null,
+      "ttsEnabled": false,
+      "durationSec": 1800,
+      "level": "Intermediate",
+      "category": "Cardio",
+      "equipment": ["Mat"]
+    },
+    "w6": {
+      "id": "w6",
+      "title": "Pilates Power",
+      "description": "Flowing Pilates sequence to lengthen and strengthen.",
+      "videoUrl": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "audioDescriptionUrl": null,
+      "ttsEnabled": false,
+      "durationSec": 1600,
+      "level": "Intermediate",
+      "category": "Pilates",
+      "equipment": ["Mat", "Ring (optional)"]
+    },
+    "w7": {
+      "id": "w7",
+      "title": "Glutes & Legs",
+      "description": "Lower-body strength with emphasis on posterior chain.",
+      "videoUrl": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "audioDescriptionUrl": null,
+      "ttsEnabled": false,
+      "durationSec": 1800,
+      "level": "Advanced",
+      "category": "Strength",
+      "equipment": ["Dumbbells", "Bench (optional)"]
+    },
+    "w8": {
+      "id": "w8",
+      "title": "Upper Body Sculpt",
+      "description": "Upper-body endurance and strength finisher.",
+      "videoUrl": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "audioDescriptionUrl": null,
+      "ttsEnabled": false,
+      "durationSec": 1500,
+      "level": "Intermediate",
+      "category": "Strength",
+      "equipment": ["Dumbbells"]
+    }
+  }
+}

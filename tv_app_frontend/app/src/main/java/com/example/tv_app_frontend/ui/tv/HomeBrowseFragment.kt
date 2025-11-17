@@ -27,7 +27,7 @@ class HomeBrowseFragment : BrowseSupportFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         title = resources.getString(R.string.app_name)
-        // Use setBrandColor for compatibility with Leanback; ContextCompat for API-safe color retrieval.
+        // Ocean Professional brand color for Leanback title.
         setBrandColor(ContextCompat.getColor(requireContext(), R.color.ocean_primary))
         headersState = HEADERS_ENABLED
         isHeadersTransitionOnBackEnabled = true
@@ -47,11 +47,11 @@ class HomeBrowseFragment : BrowseSupportFragment() {
     }
 
     private fun showLoading() {
-        // Simple placeholder, could add spinner row
+        // Could add a spinner row if desired.
     }
 
-    private fun showError(message: String) {
-        // Could add an error row
+    private fun showError(@Suppress("UNUSED_PARAMETER") message: String) {
+        // Could add an error row.
     }
 
     private fun bindHome(data: HomeState.Data) {
@@ -116,15 +116,25 @@ class HomeBrowseFragment : BrowseSupportFragment() {
     }
 }
 
+private const val CARD_WIDTH = 400
+private const val CARD_HEIGHT = 225
+private const val FOCUSED_SCALE = 1.08f
+
 class WorkoutCardPresenter : Presenter() {
     override fun onCreateViewHolder(parent: android.view.ViewGroup): ViewHolder {
         val card = ImageCardView(parent.context).apply {
-            setMainImageDimensions(320, 180)
+            setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT)
             infoVisibility = ImageCardView.CARD_REGION_VISIBLE_ALWAYS
             isFocusable = true
             isFocusableInTouchMode = true
-            // Optional: background helps focus ring visibility on some TVs
             setBackgroundColor(ContextCompat.getColor(context, R.color.card_surface))
+        }.also { card ->
+            card.setOnFocusChangeListener { v, hasFocus ->
+                val scale = if (hasFocus) FOCUSED_SCALE else 1f
+                v.scaleX = scale
+                v.scaleY = scale
+                card.isSelected = hasFocus
+            }
         }
         return ViewHolder(card)
     }
@@ -136,7 +146,6 @@ class WorkoutCardPresenter : Presenter() {
 
         val mins = (workout.durationSec / 60).coerceAtLeast(0)
         val level = workout.level ?: ""
-        // Use formatted string resource for consistency/localization
         card.contentText = card.context.getString(R.string.duration_level_format, mins, level)
 
         // Set a placeholder immediately to avoid flicker while Glide loads
@@ -151,19 +160,26 @@ class WorkoutCardPresenter : Presenter() {
             .into(card.mainImageView)
     }
 
-    override fun onUnbindViewHolder(viewHolder: ViewHolder) {
-        // Glide clears handled automatically when view recycled; no-op for now
+    override fun onUnbindViewHolder(@Suppress("UNUSED_PARAMETER") viewHolder: ViewHolder) {
+        // no-op
     }
 }
 
 class CategoryCardPresenter : Presenter() {
     override fun onCreateViewHolder(parent: android.view.ViewGroup): ViewHolder {
         val card = ImageCardView(parent.context).apply {
-            setMainImageDimensions(320, 180)
+            setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT)
             infoVisibility = ImageCardView.CARD_REGION_VISIBLE_ALWAYS
             isFocusable = true
             isFocusableInTouchMode = true
             setBackgroundColor(ContextCompat.getColor(context, R.color.card_surface))
+        }.also { card ->
+            card.setOnFocusChangeListener { v, hasFocus ->
+                val scale = if (hasFocus) FOCUSED_SCALE else 1f
+                v.scaleX = scale
+                v.scaleY = scale
+                card.isSelected = hasFocus
+            }
         }
         return ViewHolder(card)
     }
@@ -185,7 +201,7 @@ class CategoryCardPresenter : Presenter() {
             .into(card.mainImageView)
     }
 
-    override fun onUnbindViewHolder(viewHolder: ViewHolder) {
+    override fun onUnbindViewHolder(@Suppress("UNUSED_PARAMETER") viewHolder: ViewHolder) {
         // no-op
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">tv_app_frontend</string>
+    <string name="app_name">FitFlex TV</string>
 
     <!-- Sections -->
     <string name="section_continue">Continue Watching</string>
@@ -16,7 +16,7 @@
     <string name="rating_message">Your vote helps us recommend more content like this.</string>
     <string name="rating_like">I like it</string>
     <string name="rating_love">I love it</string>
-    <string name="rating_dislike">I don\'t like it</string>
+    <string name="rating_dislike">I do not like it</string>
     <string name="rating_close">Close</string>
     <string name="rating_countdown">Closing in %d seconds</string>
 </resources>

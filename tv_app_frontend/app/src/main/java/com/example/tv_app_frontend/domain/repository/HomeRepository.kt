@@ -1,16 +1,16 @@
 package com.example.tv_app_frontend.domain.repository
 
-import com.example.tv_app_frontend.data.remote.ApiClient
-import com.example.tv_app_frontend.data.remote.ApiService
+import com.example.tv_app_frontend.data.local.LocalDataSource
 import com.example.tv_app_frontend.data.remote.HomeResponse
+import com.example.tv_app_frontend.data.remote.WorkoutsResponse
 
 /**
- * Repository to access home data and recommendations.
+ * Repository to access home data and recommendations (local/mock only).
  */
 class HomeRepository {
-    private val api = ApiClient.create(ApiService::class.java)
 
-    suspend fun fetchHome(): HomeResponse = api.getHome()
+    suspend fun fetchHome(): HomeResponse = LocalDataSource.getHome()
 
-    suspend fun fetchRecommendations() = api.getRecommendations()
+    suspend fun fetchRecommendations(): WorkoutsResponse =
+        LocalDataSource.getWorkouts(category = null, level = null, durationMin = null, durationMax = null)
 }
