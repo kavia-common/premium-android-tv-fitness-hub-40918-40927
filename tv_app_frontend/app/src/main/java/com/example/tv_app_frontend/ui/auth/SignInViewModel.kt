@@ -8,6 +8,7 @@ import com.example.tv_app_frontend.data.auth.TokenStore
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.example.tv_app_frontend.BuildConfig
 
 /**
  * ViewModel to handle Google Sign-In for TV compatible flow.
@@ -21,7 +22,7 @@ class SignInViewModel : ViewModel() {
     fun startGoogleSignIn(activity: Activity) {
         /** Start Google Sign-In with basic profile request. */
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("REPLACE_WITH_WEB_CLIENT_ID")
+            .requestIdToken(BuildConfig.GOOGLE_OAUTH_WEB_CLIENT_ID)
             .requestEmail()
             .build()
         val client = GoogleSignIn.getClient(activity, gso)

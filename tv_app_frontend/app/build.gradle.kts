@@ -15,6 +15,9 @@ if (hasGoogleServicesJson) {
     apply(plugin = "com.google.gms.google-services")
 }
 
+// Resolve API base URL from -PapiBaseUrl property if provided; default to production URL
+val apiBaseUrl: String = (project.findProperty("apiBaseUrl") as String?) ?: "https://api.example.com/"
+
 android {
     namespace = "com.example.tv_app_frontend"
     compileSdk = 34
@@ -32,14 +35,16 @@ android {
         buildConfigField("String", "API_BASE_URL", "\"https://api.example.com/\"")
         buildConfigField("boolean", "FEATURE_TTS", "true")
         buildConfigField("boolean", "FEATURE_RECOMMENDATIONS", "true")
+        buildConfigField("String", "GOOGLE_OAUTH_WEB_CLIENT_ID", "\"554965754520-27borongeqi1a3j06tacjolcbea2e91o.apps.googleusercontent.com\"")
     }
 
     buildTypes {
         debug {
-            buildConfigField("String", "API_BASE_URL", "\"https://api-staging.example.com/\"")
+            buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
             isDebuggable = true
         }
         release {
+            buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
